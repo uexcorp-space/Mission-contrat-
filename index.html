@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Manager - SC Replica v3.0</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="contract-manager-container">
+        <header>
+            <div class="title-section">
+                <h1>CONTRACT MANAGER</h1>
+                <p id="headerSubtitle">SHUBIN INTERSTELLAR</p>
+            </div>
+            <button class="view-ratings-btn">
+                <i class="fas fa-star"></i>VIEW RATINGS
+            </button>
+        </header>
+
+        <nav class="main-tabs">
+            <ul>
+                <li><a href="#" class="tab-link active" data-tab="general">GENERAL</a></li>
+                <li><a href="#" class="tab-link" data-tab="personal">PERSONAL</a></li>
+                <li><a href="#" class="tab-link" data-tab="accepted">ACCEPTED</a></li>
+                <li><a href="#" class="tab-link" data-tab="history">HISTORY</a></li>
+                <li><a href="#" class="tab-link" data-tab="beacons">BEACONS</a></li>
+            </ul>
+        </nav>
+
+        <main class="content-area">
+            <aside class="categories-panel">
+                <!-- Titre "CATEGORIES" implicite, géré par le style ou l'absence de titre H2 -->
+                <ul id="categoriesList">
+                    <!-- Catégories générées par JS -->
+                </ul>
+            </aside>
+
+            <section class="contracts-list-panel">
+                 <!-- Titre "AVAILABLE CONTRACTS" implicite -->
+                <ul id="contractsList">
+                    <!-- Contrats générés par JS -->
+                </ul>
+            </section>
+
+            <section class="contract-details-panel">
+                <div class="contract-detail-title-bar" id="contractDetailTitleBar">
+                    <h3 id="contractDetailTitleText"></h3> 
+                </div>
+                <div class="contract-details-panel-content" id="contractDetailsContentArea">
+                    <p class="placeholder-text">Select a contract to view details.</p>
+                </div>
+                <button id="acceptOfferBtn" style="display: none;">ACCEPT OFFER</button>
+            </section>
+        </main>
+
+        <footer class="footer-stats">
+            <div class="status-icons-left">
+                <span><i class="fas fa-shield-alt"></i> 100%</span>
+                <span><i class="fas fa-user-astronaut"></i> 100%</span>
+            </div>
+            <div class="status-icons-center">
+                <i class="fas fa-male"></i> <i class="fas fa-rocket"></i> <i class="fas fa-headset"></i>
+                <i class="fas fa-crosshairs"></i> <i class="fas fa-archive"></i> <i class="fas fa-tools"></i>
+                <i class="fas fa-cog"></i> <i class="fas fa-biohazard"></i>
+            </div>
+            <div class="status-values-right">
+                <span>SUIT O2 <span class="value-box">100</span></span>
+                <span>TANK O2 <span class="value-box">100</span></span>
+                <span>EVA FUEL <span class="value-box">100</span></span>
+                <span>POWER <span class="value-box">100</span></span>
+            </div>
+            <div class="current-balance">
+                CURRENT BALANCE: <span id="playerBalance">0 aUEC</span>
+            </div>
+        </footer>
+    </div>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="modalCloseBtn">&times;</span>
+            <h2 id="modalTitle">Confirm Acceptance</h2> <!-- ID ajouté pour le titre du modal -->
+            <p id="modalContractTitle"></p>
+            <p id="modalActionText">Accept this contract?</p> <!-- ID ajouté pour le texte d'action -->
+            <div id="modalCountdown">Confirming in 5s...</div>
+            <div class="modal-actions">
+                <button id="confirmAcceptBtnModal">Confirm</button>
+                <button id="cancelAcceptBtnModal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --sc-bg-main-container: #0D131C; 
+    --sc-bg-panels: #101823;       
+    --sc-bg-header-footer-tabs: #0A0E17; 
+    
+    --sc-border-strong: #202d40;   
+    --sc-border-medium: #1a2433;   
+    --sc-border-subtle: #151c27;   
+
+    --sc-text-primary: #c0d8f0;    
+    --sc-text-secondary: #7c8ca3;  
+    --sc-text-title-header: #E0EFFF; 
+    --sc-text-placeholder: #4a586f; 
+
+    --sc-accent-cyan-bright: #60E0FF; 
+    --sc-accent-cyan-medium: #00A2C7; 
+    --sc-accent-cyan-dark: #007A99;   
+
+    --sc-button-accept-bg: #00C7A0; 
+    --sc-button-accept-border: #00A080;
+    --sc-button-accept-text: #0A0E17; 
+    --sc-button-accept-hover-bg: #00A080;
+
+    --font-ui-main: 'Roboto', sans-serif; 
+    --font-ui-headings: 'Orbitron', sans-serif; 
+
+    --warning-color: #ffcc00;
+    --danger-color: #e74c3c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-ui-main);
+    background-color: var(--sc-bg-main-container); 
+    color: var(--sc-text-primary);
+    line-height: 1.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 5px; 
+    font-size: 14px; /* Taille de base pour desktop */
+}
+
+.contract-manager-container {
+    width: 100%;
+    max-width: 1280px; 
+    height: calc(100vh - 10px); 
+    max-height: 760px; 
+    background-color: var(--sc-bg-panels); 
+    border: 1px solid var(--sc-border-strong);
+    box-shadow: 0 0 10px rgba(96, 224, 255, 0.1); 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: var(--sc-bg-header-footer-tabs);
+    border-bottom: 1px solid var(--sc-border-strong);
+    flex-shrink: 0;
+}
+
+header .title-section h1 {
+    font-family: var(--font-ui-main); 
+    font-weight: 500; 
+    color: var(--sc-text-title-header); 
+    font-size: 1.3em; /* Ajusté */
+    margin-bottom: 0;
+}
+
+header .title-section p {
+    font-size: 0.65em; /* Ajusté */
+    color: var(--sc-text-secondary);
+    font-weight: 400;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.view-ratings-btn {
+    background-color: var(--sc-accent-cyan-medium);
+    color: var(--sc-text-header-title); /* Texte plus clair */
+    border: 1px solid var(--sc-accent-cyan-dark);
+    padding: 4px 8px;
+    font-size: 0.65em; /* Ajusté */
+    font-weight: 700; /* Plus en gras */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+.view-ratings-btn:hover {
+    background-color: var(--sc-accent-cyan-dark);
+    color: var(--sc-text-header-title);
+}
+.view-ratings-btn .fa-star {
+    margin-right: 4px;
+    font-size: 0.9em;
+}
+
+.main-tabs ul {
+    list-style-type: none;
+    display: flex;
+    background-color: var(--sc-bg-header-footer-tabs); 
+    padding-left: 10px; 
+    border-bottom: 1px solid var(--sc-border-strong); 
+    flex-shrink: 0;
+}
+
+.main-tabs ul li a {
+    display: block;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--sc-text-secondary);
+    font-size: 0.75em; /* Ajusté */
+    font-weight: 700; /* Onglets en gras */
+    text-transform: uppercase;
+    border-top: 2px solid transparent; 
+    border-bottom: 2px solid transparent; /* Pour l'onglet actif */
+    margin-right: 1px; 
+    position: relative; 
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.main-tabs ul li a:hover {
+    color: var(--sc-accent-cyan);
+}
+.main-tabs ul li a.active {
+    color: var(--sc-accent-cyan);
+    border-bottom-color: var(--sc-border-accent-tab); 
+    background-color: transparent; /* Pas de fond différent pour l'onglet actif */
+}
+
+.content-area {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden; 
+}
+
+.categories-panel {
+    flex: 0 0 18%;
+    padding: 8px 0px 8px 8px; /* p-right 0 pour coller la "dent" */
+    border-right: 1px solid var(--sc-border-panel);
+    overflow-y: auto;
+    min-height: 0; 
+}
+.contracts-list-panel {
+    flex: 0 0 27%;
+    padding: 8px;
+    border-right: 1px solid var(--sc-border-panel);
+    overflow-y: auto;
+    min-height: 0;
+}
+.contract-details-panel {
+    flex: 0 0 55%;
+    padding: 0; /* Pas de padding ici, géré par les enfants */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0; 
+}
+
+/* Les titres H2 pour "Categories" et "Available Contracts" sont retirés de l'HTML */
+/* Si vous les remettez, décommentez et stylez ici */
+/*
+.categories-panel h2, .contracts-list-panel h2 {
+    font-family: var(--font-ui-main); 
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px; 
+    color: var(--sc-text-secondary);
+    margin-bottom: 6px;
+    padding: 4px 0 4px 5px;
+    font-weight: 500;
+}
+*/
+
+#categoriesList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 6px 5px 10px;
+    font-size: 0.7em;
+    color: var(--sc-text-secondary);
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid var(--sc-border-item-list);
+    transition: background-color 0.1s ease, color 0.1s ease;
+    line-height: 1.3;
+}
+#categoriesList li:last-child { border-bottom: none; }
+#categoriesList li .category-name { flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#categoriesList li .category-count {
+    background-color: var(--sc-border-medium);
+    color: var(--sc-text-secondary);
+    font-size: 0.9em; 
+    padding: 0px 3px;
+    border-radius: 2px;
+    margin-left: 4px;
+    font-weight: 700;
+}
+#categoriesList li:hover {
+    background-color: var(--sc-bg-category-active);
+    color: var(--sc-text-primary);
+}
+#categoriesList li.active {
+    background-color: var(--sc-bg-category-active);
+    color: var(--sc-text-primary); 
+    font-weight: 700;
+    position: relative;
+}
+#categoriesList li.active::after { /* "Dent" pour catégorie active */
+    content: ''; position: absolute; top: 0; right: -7px; bottom: 0;
+    width: 7px; background-color: var(--sc-bg-panel); 
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%); 
+    z-index: 1; 
+}
+#categoriesList li.active .category-count {
+    background-color: var(--sc-accent-cyan-darker);
+    color: var(--sc-text-header-title);
+}
+
+#contractsList li {
+    padding: 5px 8px; 
+    border-bottom: 1px solid var(--sc-border-item-list);
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.1s ease;
+}
+#contractsList li:last-child { border-bottom: none; }
+#contractsList li:hover { background-color: var(--sc-bg-item-active); }
+#contractsList li.active {
+    background-color: var(--sc-bg-contract-list-item-active); 
+    border-left: 2px solid var(--sc-border-accent-item);
+    padding-left: 6px; 
+}
+#contractsList li.active::after { /* "Dent" pour contrat actif */
+    content: ''; position: absolute; top: 0; right: -7px; bottom: 0;
+    width: 7px; background-color: var(--sc-bg-panel); 
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%); 
+    z-index: 1;
+}
+.contract-item-title {
+    font-weight: 700; 
+    color: var(--sc-text-primary); 
+    font-size: 0.75em; 
+    margin-bottom: 1px;
+    display: block; 
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#contractsList li.active .contract-item-title {
+    color: var(--sc-text-contract-title-active); 
+}
+.contract-item-meta, .contract-item-expiry {
+    font-size: 0.6em; 
+    color: var(--sc-text-secondary);
+    line-height: 1.2;
+    display: block;
+}
+.contract-item-expiry { color: var(--warning-color); margin-top: 1px; }
+.no-contracts-placeholder { 
+    color: var(--sc-text-placeholder);
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    font-size: 0.75em;
+}
+
+.contract-detail-title-bar {
+    background-color: var(--sc-bg-header-tabs); 
+    padding: 5px 10px; 
+    border-bottom: 1px solid var(--sc-border-panel);
+    flex-shrink: 0;
+}
+.contract-detail-title-bar h3 { 
+    font-family: var(--font-ui-main); 
+    font-size: 0.8em; 
+    color: var(--sc-text-primary); 
+    font-weight: 700; 
+    margin: 0; padding: 0; border: none; 
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.contract-details-panel-content { 
+    padding: 8px 10px; 
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; 
+}
+.placeholder-text {
+    text-align: center;
+    color: var(--sc-text-placeholder); 
+    font-style: normal; 
+    margin: auto; 
+    font-size: 0.8em;
+}
+
+.contract-info-grid {
+    gap: 3px 6px; 
+    margin-bottom: 8px;
+    font-size: 0.7em; 
+    display: grid; 
+    grid-template-columns: auto 1fr; 
+}
+.contract-info-grid .label {
+    font-weight: 400; 
+    color: var(--sc-text-secondary);
+    display: flex;
+    align-items: center;
+    padding-right: 4px; 
+}
+.contract-info-grid .label i {
+    margin-right: 5px; 
+    color: var(--sc-text-secondary); 
+    width: 12px; 
+    text-align: center;
+    font-size: 0.9em; 
+}
+.contract-info-grid .value {
+    color: var(--sc-text-primary);
+    font-weight: 500; 
+}
+.contract-info-grid .label i.fa-coins { color: #DDC273; }
+
+.contract-details-section { 
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--sc-border-subtle); 
+}
+.contract-details-section:last-of-type { 
+    border-bottom: none;
+    margin-bottom: 0; 
+}
+.contract-details-section h4 { 
+    font-size: 0.7em;
+    color: var(--sc-accent-cyan); 
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+.contract-checklist { padding-left: 0; list-style-type: none; }
+.contract-checklist li {
+    list-style-type: none; position: relative;
+    margin-bottom: 2px; font-size: 0.7em; color: var(--sc-text-secondary);
+    padding-left: 12px; 
+    border-left: none !important; 
+    background-color: transparent !important; 
+}
+.contract-checklist li::before { 
+    content: ''; display: inline-block;
+    width: 5px; height: 5px;
+    border: 1px solid var(--sc-text-secondary);
+    position: absolute; left: 0px; top: 3px;
+    background-color: transparent;
+}
+.contract-checklist li.completed::before {
+    background-color: var(--sc-accent-cyan);
+    border-color: var(--sc-accent-cyan);
+}
+.contract-checklist li ul { 
+    padding-left: 10px; margin-top: 2px;
+    list-style-type: none;
+}
+.contract-checklist li ul li {
+    font-size: 0.9em; padding-left: 0; color: var(--sc-text-secondary);
+}
+.contract-checklist li ul li::before { content: none; } 
+
+.contract-details-section > p { 
+    font-size: 0.7em;
+    line-height: 1.4;
+    color: var(--sc-text-secondary);
+    margin-top: 4px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.contract-terms {
+    margin-top: auto; 
+    padding-top: 8px;
+    border-top: 1px solid var(--sc-border-medium);
+    display: flex;
+    flex-direction: column;
+}
+.contract-terms h3 { 
+    color: var(--sc-text-secondary); 
+    margin-bottom: 4px;
+    font-size: 0.6em; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.contract-terms p {
+    font-size: 0.65em; 
+    line-height: 1.3;
+    color: var(--sc-text-secondary); 
+    overflow-y: auto; 
+    padding-right: 3px; 
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 60px; 
+}
+.contract-terms .disclaimer {
+    font-size: 0.55em; 
+    font-style: italic;
+    color: var(--sc-text-secondary);
+    margin-top: 6px;
+    border-top: 1px dashed var(--sc-border-subtle);
+    padding-top: 4px;
+}
+
+#acceptOfferBtn {
+    background-color: var(--sc-button-accept-bg);
+    color: var(--sc-button-accept-text);
+    border: 1px solid var(--sc-button-accept-border);
+    padding: 6px 15px; 
+    border-radius: 2px; 
+    font-weight: 700; 
+    font-size: 0.7em; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 8px 0 0 0; 
+    align-self: stretch; 
+    transition: background-color 0.2s ease;
+    flex-shrink: 0; 
+    clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 3px, 100% calc(100% - 3px), calc(100% - 3px) 100%, 3px 100%, 0 calc(100% - 3px), 0 3px);
+}
+#acceptOfferBtn:hover { background-color: var(--sc-button-accept-hover-bg); }
+#acceptOfferBtn:disabled { 
+    background-color: #303842; border-color: #404852;
+    color: #606872; cursor: not-allowed;
+}
+
+.footer-stats {
+    padding: 3px 8px; 
+    background-color: var(--sc-bg-header-footer-tabs);
+    border-top: 1px solid var(--sc-border-panel);
+    font-size: 0.6em; 
+    color: var(--sc-text-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; 
+}
+.status-icons-left, .status-icons-center, .status-values-right, .current-balance {
+    display: flex; align-items: center; gap: 4px; 
+}
+.status-icons-left span, .status-values-right span {
+    display: flex; align-items: center; gap: 2px; 
+}
+.status-icons-center i { font-size: 0.85em; } 
+.value-box { 
+    background-color: var(--sc-accent-cyan-medium);
+    color: var(--sc-bg-header-footer-tabs);
+    padding: 0px 2px; font-weight: 700;
+    font-size: 0.9em; line-height: 1.1; border-radius: 1px;
+}
+.current-balance { font-weight: 500; color: var(--sc-text-secondary); }
+.current-balance span { color: var(--sc-text-primary); font-weight: 700; margin-left: 2px;}
+
+.modal {
+    display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+    width: 100%; height: 100%; overflow: auto;
+    background-color: rgba(10, 15, 25, 0.9); 
+    justify-content: center; align-items: center;
+}
+.modal-content {
+    background-color: var(--sc-bg-panel); 
+    padding: 15px; border: 1px solid var(--sc-border-panel);
+    width: 90%; max-width: 360px; 
+    text-align: center;
+    box-shadow: 0 0 10px rgba(96, 224, 255, 0.1);
+    position: relative;
+}
+.modal-content h2#modalTitle { /* Cibler spécifiquement le titre du modal */
+    font-family: var(--font-main); 
+    color: var(--sc-accent-cyan);
+    margin-bottom: 8px; font-size: 1em; font-weight: 500;
+}
+#modalContractTitle {
+    font-weight: 500; margin-bottom: 5px; font-size: 0.8em;
+    color: var(--sc-text-primary);
+}
+#modalActionText { /* Style pour le texte d'action */
+    font-size: 0.8em;
+    margin-bottom: 8px;
+}
+#modalCountdown {
+    font-size: 0.85em; color: var(--warning-color);
+    margin: 8px 0; font-weight: 700;
+}
+.modal-actions button {
+    padding: 5px 10px; margin: 4px; border-radius: 2px;
+    border: none; cursor: pointer; font-weight: 700;
+    text-transform: uppercase; font-size: 0.65em; 
+}
+#confirmAcceptBtnModal { background-color: var(--sc-button-accept-bg); color: var(--sc-button-accept-text); }
+#confirmAcceptBtnModal:hover { background-color: var(--sc-button-accept-hover-bg); }
+#cancelAcceptBtnModal { background-color: var(--danger-color); color: white; } 
+#cancelAcceptBtnModal:hover { background-color: #c0392b; }
+.close-button {
+    color: var(--sc-text-secondary); font-size: 18px; 
+    position: absolute; top: 3px; right: 6px;
+}
+.close-button:hover, .close-button:focus { color: var(--sc-accent-cyan); cursor: pointer; }
+
+
+@media (max-width: 1024px) { 
+    body { padding: 0; font-size: 13px; }
+    .contract-manager-container {
+        width: 100%; height: 100%; max-height: none;
+        border-radius: 0; border: none; box-shadow: none;
+    }
+    .content-area { 
+        flex-direction: column; min-height: 0; overflow-y: auto; 
+    }
+    .categories-panel, .contracts-list-panel, .contract-details-panel {
+        flex-grow: 0; flex-shrink: 1; 
+        flex-basis: auto !important; width: 100% !important; 
+        border-right: none; border-bottom: 1px solid var(--sc-border-panel);
+        overflow-y: visible; min-height: unset; 
+    }
+    .categories-panel { padding: 6px; } 
+    .contracts-list-panel { padding: 6px; }
+    .contract-details-panel { 
+        border-bottom: none; padding: 0; 
+        flex-grow: 1; 
+    }
+    .contract-detail-title-bar { padding: 6px 8px;} 
+    .contract-details-panel-content { padding: 8px; }
+
+
+    #categoriesList li, #contractsList li {
+        white-space: normal; overflow: visible; text-overflow: clip;
+        font-size: 0.8em; padding: 8px 10px; 
+    }
+    #categoriesList li.active::after, #contractsList li.active::after { display: none; } 
+
+
+    #acceptOfferBtn {
+        align-self: stretch; margin: 8px; padding: 10px; 
+        font-size: 0.8em; clip-path: none; 
+    }
+     .footer-stats {
+        flex-wrap: wrap; justify-content: center;
+        gap: 4px 8px; padding: 4px; font-size: 0.6em; 
+    }
+}
+
+/* Pas besoin de @media (max-width: 768px) spécifique si 1024px couvre déjà bien les petits écrans.
+   Si des ajustements plus fins sont nécessaires pour les très petits écrans, on peut l'ajouter. */
